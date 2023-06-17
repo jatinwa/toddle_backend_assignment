@@ -5,6 +5,7 @@ const app = express();
 const { v1:uuidv1 } = require('uuid');
 const bcrypt = require('bcryptjs');
 const authenticate = require('../middleware/authenticate');
+const jwt = require('jsonwebtoken');
 
 const id = uuidv1();
 
@@ -30,12 +31,24 @@ router.post('/', async (req, res) => {
   
       // Save the student to the database
       await student.save();
+
+      const data = {
+        user:{
+          id: student.student_id
+        }
+      }
+
+      const JWT_SECRET = 'jaajnvc#oui@bs3df';
+      const token = jwt.sign(data, JWT_SECRET);
+    
+      res.json({token: token });
   
       res.status(201).json({ message: 'Student registered successfully' });
     } catch (error) {
       res.status(500).json({ error: 'Failed to register student' });
     }
   });
+  
 
   router.post('/getstudent', authenticate, async (req, res) => {
     try {

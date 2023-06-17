@@ -6,7 +6,7 @@ const app = express();
 const authenticate = require('../middleware/authenticate');
 
 // Fetch journals published by a particular teacher
-router.get('/:teacher_id', authenticate, async (req, res) => {
+router.get('/:teacher_id', async (req, res) => {
   try {
     const { teacher_id } = req.params;
 

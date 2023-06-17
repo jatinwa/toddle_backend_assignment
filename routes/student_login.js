@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
       }
   
       // Check if the password matches
-      const isValid = await bcrypt.compare(password, teacher.password);
+      const isValid = await bcrypt.compare(password, student.password);
       if (!isValid) {
         return res.status(401).json({ error: 'Incorrect password' });
       }
@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
       // Generate a JWT
       const data = {
         user:{
-          id: teacher.teacher_id
+          id: student.student_id
         }
       }
 
