@@ -1,12 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-// const Teacher = require('./models/Teacher');
+require('dotenv').config();
 
 const app = express();
 app.use(bodyParser.json());
 
-const mongoURI = 'mongodb+srv://jatinwatts8:uBtrfss6PXD7x4zu@cluster0.hubsfwk.mongodb.net/';
+const mongoURI = process.env.DATABASE_URL;
 
 const connectToMongo = () => {
     mongoose.connect(mongoURI, { useNewUrlParser: true,useUnifiedTopology: true,
